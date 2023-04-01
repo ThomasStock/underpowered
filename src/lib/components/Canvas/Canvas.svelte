@@ -1,15 +1,10 @@
-<script lang="ts" context="module">
-	export type OnUpdate = (context: CanvasRenderingContext2D, scale: number) => void;
-</script>
-
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import calculateCanvas from './calculateCanvas';
+	import { context, scale } from '../../stores/canvas';
 
 	let canvas: HTMLCanvasElement;
 	let box: HTMLDivElement;
-
-	export let onUpdate: OnUpdate = () => undefined;
 
 	onMount(() => {
 		const resizeObserver = new ResizeObserver((entries) => {
@@ -18,13 +13,12 @@
 
 			const map = { width: 1000, height: 1000 };
 
-			const { width, height, scale } = calculateCanvas({ map, boxRect });
+			const { width, height, scale: canvasScale } = calculateCanvas({ map, boxRect });
 			canvas.width = width;
 			canvas.height = height;
 
-			const context = canvas.getContext('2d')!;
-
-			onUpdate(context, scale);
+			context.set(canvas.getContext('2d')!);
+			scale.set(canvasScale);
 		});
 		resizeObserver.observe(box);
 
