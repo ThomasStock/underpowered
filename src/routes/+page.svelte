@@ -1,9 +1,18 @@
 <script lang="ts">
-	import Canvas from '../lib/components/Canvas/Canvas.svelte';
-	import { scale } from '../lib/stores/canvas';
+	import App from 'lib/App.svelte';
+	import { props } from 'lib/game';
+	import { stringify } from 'postcss';
+
+	const propKeys = Object.keys($props) as Array<keyof typeof $props>;
 </script>
 
-{#if $scale}
-	<div class="fixed">Scale: {$scale}</div>
+{#if $props}
+	<div class="fixed z-50 bg-white opacity-50 w-48">
+		{#each propKeys as propKey}
+			<div>
+				{propKey}: {typeof $props[propKey] === 'object' ? 'obj' : $props[propKey]}
+			</div>
+		{/each}
+	</div>
 {/if}
-<Canvas />
+<App />
