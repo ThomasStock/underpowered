@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { renderable, width, height } from './game.js';
+	import { renderable, scaledHeight, scaledWidth } from './game.js';
 	import Text from './Text.svelte';
 	import vec2 from 'gl-vec2';
 
@@ -7,27 +7,34 @@
 	export let size = 10;
 	export let thickness = 3;
 
-	export let startX = $width / 2;
-	export let startY = $height / 2;
+	let x = 0;
+	let y = 0;
+	$: {
+		x = $scaledWidth / 2;
+		y = $scaledHeight / 2;
+	}
+
 	export let maxVelocity = 5;
 
 	let text: Text;
 
-	let x = startX;
-	let y = startY;
 	const velocity = [0, 0];
 
+	console.log({ x, y });
+
 	renderable((props, dt) => {
-		const { context, width, height } = props;
+		const { context, scaledHeight, scaledWidth } = props;
+
+		console.log('scaled', scaledHeight, scaledWidth);
 
 		let position = [x, y];
 
-		if (x < 0 || x > width) {
-			x = Math.max(0, Math.min(width, x));
+		if (x < 0 || x > scaledWidth) {
+			x = Math.max(0, Math.min(scaledWidth, x));
 			velocity[0] *= -1;
 		}
-		if (y < 0 || y > height) {
-			y = Math.max(0, Math.min(height, y));
+		if (y < 0 || y > scaledHeight) {
+			y = Math.max(0, Math.min(scaledHeight, y));
 			velocity[1] *= -1;
 		}
 		velocity[0] = Math.max(-maxVelocity, Math.min(maxVelocity, velocity[0]));

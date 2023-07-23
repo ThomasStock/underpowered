@@ -11,7 +11,7 @@
 
 <Canvas>
 	<Background color="hsl(0, 0%, 10%)">
-		<DotGrid every={100} color="hsla(0, 0%, 100%, 0.5)" />
+		<DotGrid every={50} color="hsla(0, 0%, 100%, 0.5)" />
 	</Background>
 	<Character size={10} />
 	<Text
