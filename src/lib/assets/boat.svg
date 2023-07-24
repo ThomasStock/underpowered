@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="150px" height="325px" viewBox="0 0 150 325" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Boat</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M75,0 C116.421356,0 150,33.5786438 150,75 L150,325 L0,325 L0,75 L0.0100478572,73.7597379 C0.672357147,32.9104288 33.9928573,0 75,0 Z" id="Boat" fill="#FF5757"></path>
+    </g>
+</svg>

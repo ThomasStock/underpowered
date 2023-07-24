@@ -18,7 +18,7 @@
 	});
 </script>
 
-<Text {text} fontSize={12} fontFamily="Courier New" align="left" baseline="top" x={20} y={20} />
+<Text {text} fontSize={12} fontFamily="Courier New" align="right" baseline="top" x={20} y={20} />
 
 <!-- The following allows this component to nest children -->
 <slot />

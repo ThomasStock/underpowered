@@ -118,13 +118,12 @@
 </script>
 
 <div class="w-screen h-screen bg-yellow-300" bind:this={box}>
+	<slot />
 	<canvas
-		class="m-auto absolute inset-0 bg-fuchsia-200"
+		class="m-auto absolute inset-0 bg-blue-300"
 		bind:this={canvas}
 		width={$scaledWidth * $pixelRatio}
 		height={$scaledHeight * $pixelRatio}
 		style="width: {$scaledWidth}px; height: {$scaledHeight}px;"
 	/>
 </div>
-
-<slot />

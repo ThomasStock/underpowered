@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { renderable } from './game.js';
+	import { renderable, scaledWidth, width } from './game.js';
 
 	export let color = 'hsl(0, 0%, 100%)';
 	export let align: CanvasTextAlign = 'center';
@@ -19,7 +19,7 @@
 			context.font = `${fontSize}px ${fontFamily}`;
 			context.textAlign = align;
 			context.textBaseline = baseline;
-			context.fillText(text, x, y);
+			context.fillText(text, $scaledWidth - x, y);
 		}
 	});
 </script>

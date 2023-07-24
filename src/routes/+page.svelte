@@ -7,12 +7,12 @@
 </script>
 
 {#if $props}
-	<div class="fixed z-50 bg-white opacity-50 w-48">
-		{#each propKeys as propKey}
-			<div>
-				{propKey}: {typeof $props[propKey] === 'object' ? 'obj' : $props[propKey]}
-			</div>
-		{/each}
+	<div class="fixed bottom-0 z-50 bg-white opacity-50">
+		<div>Scale: {$props['scale']}</div>
+		<div>Width: {$props['width']}</div>
+		<div>scaledWidth: {$props['scaledWidth']}</div>
+		<div>pixelRatio: {$props['pixelRatio']}</div>
+		<div>time: {$props['time'].toFixed(1)}</div>
 	</div>
 {/if}
 <App />
