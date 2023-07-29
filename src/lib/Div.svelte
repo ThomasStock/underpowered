@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class="m-auto absolute inset-0 border-green-600 z-10 border-solid border-8"
+	class="m-auto absolute inset-0 outline-green-600 z-10 outline-2 outline"
 	style="width: {$scaledWidth}px; height: {$scaledHeight}px;"
 >
 	<slot />

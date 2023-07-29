@@ -23,8 +23,9 @@
 	let listeners: RenderElement[] = [];
 	let canvas: HTMLCanvasElement;
 	let context: CanvasRenderingContext2D;
-	let box: HTMLDivElement;
+	let boxRect: DOMRectReadOnly;
 	let frame: number;
+	let margin = 20;
 
 	function initializeLoop() {
 		// setup entities
@@ -90,34 +91,29 @@
 		};
 	}
 
+	$: if (boxRect) {
+		const scaled = calculateCanvas({ map: { width: $width, height: $height }, boxRect, margin });
+
+		scaledHeight.set(scaled.height);
+		scaledWidth.set(scaled.width);
+		scale.set(scaled.scale);
+	}
+
 	onMount(() => {
 		canvasStore.set(canvas);
 
 		context = canvas.getContext('2d')!;
 		contextStore.set(context);
 
-		const resizeObserver = new ResizeObserver((entries) => {
-			const entry = entries[0];
-			const boxRect = entry.contentRect;
-
-			const scaled = calculateCanvas({ map: { width: $width, height: $height }, boxRect });
-
-			scaledHeight.set(scaled.height);
-			scaledWidth.set(scaled.width);
-			scale.set(scaled.scale);
-		});
-		resizeObserver.observe(box);
-
 		const stopLoop = initializeLoop();
 
 		return () => {
-			resizeObserver.unobserve(box);
 			stopLoop();
 		};
 	});
 </script>
 
-<div class="w-screen h-screen bg-yellow-300" bind:this={box}>
+<div class="w-screen h-screen bg-yellow-300" bind:contentRect={boxRect}>
 	<slot />
 	<canvas
 		class="m-auto absolute inset-0 bg-blue-300"

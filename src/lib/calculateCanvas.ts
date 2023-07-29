@@ -1,12 +1,16 @@
 const calculateCanvas = (args: {
 	map: { width: number; height: number };
 	boxRect: DOMRectReadOnly;
+	margin: number;
 }) => {
-	const { map, boxRect } = args;
+	const { map, boxRect, margin = 0 } = args;
 	const mapAspectRatio = map.width / map.height;
 
+	const marginedBoxHeight = boxRect.height - margin * 2;
+	const marginedBoxWidth = boxRect.width - margin * 2;
+
 	// Aspect ratio of the viewport (box fills viewport via css)
-	const boxAspectRatio = boxRect.width / boxRect.height;
+	const boxAspectRatio = marginedBoxWidth / marginedBoxHeight;
 
 	let width, height;
 
@@ -14,11 +18,11 @@ const calculateCanvas = (args: {
 	// Canvas is centered with css so there is some 'leftover' either left/right or bottom.top
 	//  while we make it as big as possible.
 	if (mapAspectRatio > boxAspectRatio) {
-		width = boxRect.width;
-		height = boxRect.width / mapAspectRatio;
+		width = marginedBoxWidth;
+		height = marginedBoxWidth / mapAspectRatio;
 	} else {
-		height = boxRect.height;
-		width = boxRect.height * mapAspectRatio;
+		height = marginedBoxHeight;
+		width = marginedBoxHeight * mapAspectRatio;
 	}
 
 	// Now we know the <canvas> is for example 2000*1000 and our map could be 100*50 so scale is '20'.
