@@ -1,27 +1,29 @@
 <script lang="ts">
 	import { scaledHeight, scaledWidth } from 'game';
-
-	let boat: HTMLImageElement;
+	import { afterUpdate } from 'svelte';
 
 	let boatRect: DOMRectReadOnly;
-	let height = 0;
-	let top = 0;
-	let left = 0;
+	let height: number;
+	let top: number;
+	let left: number;
 
-	$: {
-		const screenWidth = $scaledWidth;
-		const screenHeight = $scaledHeight;
-		const boatClientWidth = boatRect?.width || 0;
-
-		height = screenHeight / 2;
-		top = screenHeight / 2 - height / 2;
-
-		console.log({ screenHeight, screenWidth, boatClientWidth });
-
-		if (boatClientWidth && screenWidth) {
-			left = screenWidth / 2 - boatClientWidth / 2;
-		}
+	$: if (boatRect) {
+		height = $scaledHeight / 2;
+		top = $scaledHeight / 2 - height / 2;
+		left = $scaledWidth / 2 - boatRect.width / 2;
 	}
+
+	let ready = false;
+	afterUpdate(() => {
+		console.log('after update', {
+			left,
+			top,
+			height,
+			bw: boatRect?.width,
+			scaledH: $scaledHeight,
+			scaledw: $scaledWidth
+		});
+	});
 </script>
 
 <img
@@ -32,5 +34,6 @@
 	style:top="{top}px"
 	style:left="{left}px"
 	style:height="{height}px"
+	style:opacity={ready ? 1 : 0}
 />
 <slot />
