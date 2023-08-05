@@ -7,6 +7,7 @@ module.exports = {
 	overrides: [{ files: ['*.svelte'], processor: 'svelte/svelte' }],
 	settings: {
 		'svelte/typescript': () => require('typescript'),
+		'svelte/ignore-warnings': ({ code }) => true,
 	},
 	parserOptions: {
 		sourceType: 'module',

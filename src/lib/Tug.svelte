@@ -8,6 +8,9 @@
 	let naturalWidth: number;
 	let naturalHeight: number;
 
+	let mouseInfo = {hovered :false, down: false};
+	$: ({ hovered, down } = mouseInfo)
+
 	$: if (naturalHeight && naturalWidth) {
 		height = 60 * $scale;
 
@@ -24,10 +27,16 @@
 
 <img
 	src={Tug}
-	class="cursor-grab outline-4 select-none outline-cyan-600 absolute outline-offset-2 outline-dashed"
+	draggable="false"
+	class={`cursor-grab absolute select-none 
+	${hovered ? 'outline-4 outline-cyan-600 outline-offset-2 outline-dashed' : ''}`}
 	alt="tug"
 	bind:naturalWidth
 	bind:naturalHeight
+	on:mouseenter={() => (mouseInfo.hovered = true)}
+	on:mouseleave={() => (mouseInfo.hovered = false)}
+	on:mousedown={() => (mouseInfo.down = true)}
+	on:mouseup={() => (mouseInfo.down = false)}
 	style:top="{top}px"
 	style:left="{left}px"
 	style:height="{height}px"
