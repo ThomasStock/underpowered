@@ -15,9 +15,9 @@ const config = {
 		alias: {
 			components: path.resolve('./src/lib/components'),
 			game: path.resolve('./src/lib/game'),
-			lib: path.resolve('./src/lib')
-		}
-	}
+			lib: path.resolve('./src/lib'),
+		},
+	},
 };
 
 export default config;

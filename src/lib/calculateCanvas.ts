@@ -1,8 +1,4 @@
-const calculateCanvas = (args: {
-	map: { width: number; height: number };
-	boxRect: DOMRectReadOnly;
-	margin: number;
-}) => {
+const calculateCanvas = (args: { map: { width: number; height: number }; boxRect: DOMRectReadOnly; margin: number }) => {
 	const { map, boxRect, margin = 0 } = args;
 	const mapAspectRatio = map.width / map.height;
 
@@ -33,7 +29,7 @@ const calculateCanvas = (args: {
 	return {
 		scale,
 		width,
-		height
+		height,
 	};
 };
 

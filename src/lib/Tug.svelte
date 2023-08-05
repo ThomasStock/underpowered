@@ -24,8 +24,7 @@
 
 <img
 	src={Tug}
-	class="cursor-grab outline-4
-	 select-none outline-cyan-600 absolute outline-offset-2 outline-dashed"
+	class="cursor-grab outline-4 select-none outline-cyan-600 absolute outline-offset-2 outline-dashed"
 	alt="tug"
 	bind:naturalWidth
 	bind:naturalHeight

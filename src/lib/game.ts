@@ -26,7 +26,7 @@ const propStores = {
 	pixelRatio,
 	context,
 	canvas,
-	time
+	time,
 };
 type PropValues = StoreValues<typeof propStores>;
 export const props = deriveObject(propStores);
@@ -49,7 +49,7 @@ export const renderable = (render: RenderFn) => {
 	const element: RenderElement = {
 		ready: false,
 		mounted: false,
-		render
+		render,
 	};
 	api.add(element);
 	onMount(() => {
