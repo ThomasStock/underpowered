@@ -1,9 +1,6 @@
 <script lang="ts">
 	import App from 'lib/App.svelte';
 	import { props } from 'lib/game';
-	import { stringify } from 'postcss';
-
-	const propKeys = Object.keys($props) as Array<keyof typeof $props>;
 </script>
 
 {#if $props}

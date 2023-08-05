@@ -1,5 +1,6 @@
 import { getContext, onMount } from 'svelte';
-import { writable, derived, type Readable, type Writable } from 'svelte/store';
+import { writable } from 'svelte/store';
+import { deriveObject, type StoreValues } from '../packages/storeValues';
 
 const WIDTH = 500;
 const HEIGHT = 500;
@@ -43,7 +44,6 @@ export type Context = {
 	add(element: RenderElement): void;
 	remove(element: RenderElement): void;
 };
-
 export const renderable = (render: RenderFn) => {
 	const api = getContext<Context>(key);
 	const element: RenderElement = {
@@ -60,26 +60,3 @@ export const renderable = (render: RenderFn) => {
 		};
 	});
 };
-
-type StoreValues<T extends object> = {
-	[K in keyof T]: T[K] extends Writable<infer Z> ? Z : never;
-};
-
-type Derived<T extends object> = Readable<StoreValues<T>>;
-
-function deriveObject<
-	T extends { [K in keyof T]: T[K] extends Readable<infer Z> ? Readable<Z> : never }
->(props: T): Derived<T> {
-	const keys = Object.keys(props) as Array<keyof typeof props>;
-	const list = keys.map((key) => {
-		return props[key];
-	});
-	return derived(list, (array) => {
-		const x = array.reduce((dict, value, i) => {
-			(dict[keys[i]] as unknown) = value;
-			return dict;
-		}, {} as StoreValues<T>);
-
-		return x;
-	});
-}
